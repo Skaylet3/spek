@@ -1,50 +1,43 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version: New -> 1.0.0
+Principles Modified:
+- [NEW] Minimalist Core
+- [NEW] Stack Compliance
+- [NEW] Local Data Persistence
+- [NEW] Simplicity & Architecture
+
+Templates Status:
+- .specify/templates/plan-template.md: ✅
+- .specify/templates/spec-template.md: ✅
+- .specify/templates/tasks-template.md: ✅
+
+Follow-up:
+- None
+-->
+# Gem Link Shortener Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Minimalist Core
+The service MUST focus solely on link shortening and redirection. Features like user accounts, complex analytics, or link expiration are strictly out of scope unless this constitution is amended. This ensures the project remains lightweight and focused on its primary utility.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Stack Compliance
+Development MUST use Next.js, TailwindCSS, and TypeScript. No external UI component libraries (e.g., Material UI, Chakra, Radix) are permitted without an amendment. Standard Next.js patterns (App Router preferred) should be followed.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Local Data Persistence
+To maintain zero operational overhead, data MUST be stored in a local JSON file. No external database connections (PostgreSQL, MongoDB, Redis, etc.) are permitted. Data access logic MUST be isolated in a dedicated service to allow for potential future migration, but the current implementation remains file-based.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
-
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### IV. Simplicity & Architecture
+The architecture MUST be simple. Avoid over-engineering or complex patterns (like strict Domain-Driven Design layers) where direct logic suffices. Code should be easy to read and modify. Files should be organized intuitively within the standard Next.js project structure.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Process
+This constitution supersedes all other practices. Any changes to the core principles (stack, storage, scope) require a formal amendment to this document, a version bump, and team ratification.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Compliance
+All architectural decisions, PRs, and code reviews must verify compliance with these principles. Complexity must be justified against Principle IV.
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-19 | **Last Amended**: 2026-01-19
