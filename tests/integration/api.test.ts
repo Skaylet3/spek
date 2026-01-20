@@ -3,6 +3,16 @@ import { POST } from '@/app/api/shorten/route';
 import fs from 'fs/promises';
 import path from 'path';
 
+jest.mock('@vercel/kv', () => ({
+	createClient: jest.fn(() => ({
+		get: jest.fn(),
+		set: jest.fn(),
+		exists: jest.fn(),
+		keys: jest.fn(),
+		mget: jest.fn(),
+	})),
+}));
+
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'links.json');
 
@@ -20,8 +30,7 @@ describe('API Integration', () => {
 		const response = await POST(mockRequest);
 		expect(response.status).toBe(201);
 
-		const text = await response.text();
-		const data = JSON.parse(text);
+		const data = await response.json();
 		expect(data.id).toBeDefined();
 		expect(data.originalUrl).toBe('https://example.com');
 	});
