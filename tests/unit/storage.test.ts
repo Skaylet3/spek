@@ -2,6 +2,16 @@ import { createLink, getAllLinks, getLinkById } from '@/services/storage';
 import fs from 'fs/promises';
 import path from 'path';
 
+jest.mock('@vercel/kv', () => ({
+	createClient: jest.fn(() => ({
+		get: jest.fn(),
+		set: jest.fn(),
+		exists: jest.fn(),
+		keys: jest.fn(),
+		mget: jest.fn(),
+	})),
+}));
+
 // We'll use a specific test file instead of mocking fs
 const TEST_DATA_DIR = path.join(process.cwd(), 'data');
 const TEST_DATA_FILE = path.join(TEST_DATA_DIR, 'links.json');
