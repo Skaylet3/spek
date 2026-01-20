@@ -15,12 +15,10 @@ const hasKVSecrets = !!(
 );
 const useKV = isVercel || hasKVSecrets;
 
-console.log(
-	`[Storage Service] Mode: ${useKV ? 'KV (Cloud)' : 'Local (Filesystem)'}`,
-);
-if (useKV && !hasKVSecrets) {
-	console.warn(
-		'[Storage Service] CRITICAL: Running on Vercel but KV secrets are missing! Falling back to KV operations which WILL fail.',
+if (isVercel && !hasKVSecrets) {
+	console.error(
+		'❌ [Storage Service] ERROR: Running on Vercel but KV environment variables are missing! ' +
+			'Please connect a Vercel KV database in your project settings.',
 	);
 }
 
