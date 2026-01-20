@@ -1,22 +1,12 @@
 import { createClient } from '@vercel/kv';
 
-if (process.env.NODE_ENV === 'production') {
-	const requiredEnvVars = [
-		'KV_URL',
-		'KV_REST_API_URL',
-		'KV_REST_API_TOKEN',
-		'KV_REST_API_READ_ONLY_TOKEN',
-	];
-	const missingVars = requiredEnvVars.filter(v => !process.env[v]);
+const kvUrl = process.env.KV_REST_API_URL;
+const kvToken = process.env.KV_REST_API_TOKEN;
 
-	if (missingVars.length > 0) {
-		console.warn(
-			`Warning: Missing Vercel KV environment variables: ${missingVars.join(', ')}`,
-		);
-	}
-}
-
+// In a real Vercel environment, these should be present if the KV db is linked.
+// We use a fallback empty string or ! to satisfy types, but but the service check
+// in storage.ts will warn if these are actually missing in production.
 export const kv = createClient({
-	url: process.env.KV_REST_API_URL!,
-	token: process.env.KV_REST_API_TOKEN!,
+	url: kvUrl || '',
+	token: kvToken || '',
 });
