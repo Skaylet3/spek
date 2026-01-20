@@ -46,8 +46,8 @@ export async function getAllLinks(): Promise<Link[]> {
 		try {
 			const keys = await kv.keys('link:*');
 			if (keys.length === 0) return [];
-			// mget<Link>(...) returns (Link | null)[]
-			const links = await kv.mget<Link>(...keys);
+			// mget returns an array of the items
+			const links = await kv.mget<(Link | null)[]>(...keys);
 			return links.filter((l): l is Link => l !== null);
 		} catch (error) {
 			console.error('[Storage Service] KV getAllLinks error:', error);
